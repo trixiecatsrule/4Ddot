@@ -13,6 +13,7 @@ void setup() {
   background(255);
   smooth(0);
   initFieldDataSquares();
+  strokeWeight(2);
   //noLoop();
 }
 
@@ -61,6 +62,8 @@ void draw() {
   background(0);
   drawCube(fieldDataSegs, millis()/8000.0*PI, PI*sin(millis()/4000.0*PI)/20);
   ndrawSquareFace(0, 0, 0, 0, 2, millis()/8000.0*PI, PI*sin(millis()/4000.0*PI)/20);
+  ndrawSquareFace(0, 0, 0, 0, 1, millis()/8000.0*PI, PI*sin(millis()/4000.0*PI)/20);
+  ndrawSquareFace(0, 0, 0, 1, 2, millis()/8000.0*PI, PI*sin(millis()/4000.0*PI)/20);
   //drawSquareFace(0, 0, 0, 0, 1, 1, 1, millis()/8000.0*PI, PI*sin(millis()/4000.0*PI)/20);
   //rotateAndDraw3DLine(-200, 0, 0, 200, 0, 0, color(255, 255, 255), millis()/8000.0*PI, PI*sin(millis()/4000.0*PI)/20);
   //drawCube(fieldDataSegs, 0, 0);

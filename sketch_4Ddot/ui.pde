@@ -31,31 +31,48 @@ void drawCubeFace(int x, int y, int z, int w, int d, float r, float rb) {
 }
 
 void ndrawSquareFace(float x, float y, float z, int w, int d, float r, float rb) {
-  x = -.8 + x;
-  y = -.8 + y;
-  z = -.8 + z;
+  float littleOffset = w * .05;
+  float bigOffset = .6*BLOCKSIZE - BLOCKSIZE*2*littleOffset;
+  color c;
+  switch(w) {
+    case 0:
+      c = color(255, 0, 0);
+      break;
+    case 1:
+      c = color(0, 255, 0);
+      break;
+    case 2:
+      c = color(0, 0, 255);
+      break;
+    default:
+     c = color(255, 255, 255);
+     break;
+  }
+  x = -.8 + x + littleOffset;
+  y = -.8 + y + littleOffset;
+  z = -.8 + z + littleOffset;
   x *= BLOCKSIZE;
   y *= BLOCKSIZE;
   z *= BLOCKSIZE;
   //xy, xz, yz, wx, wy, wz
   switch(d) {
     case 0:
-      rotateAndDraw3DLine(x, y, z, x + .6*BLOCKSIZE, y, z, color(255, 255, 255), r, rb);
-      rotateAndDraw3DLine(x, y, z, x, y + .6*BLOCKSIZE, z, color(255, 255, 255), r, rb);
-      rotateAndDraw3DLine(x + .6*BLOCKSIZE, y, z, x + .6*BLOCKSIZE, y + .6*BLOCKSIZE, z, color(255, 255, 255), r, rb);
-      rotateAndDraw3DLine(x, y + .6*BLOCKSIZE, z, x + .6*BLOCKSIZE, y + .6*BLOCKSIZE, z, color(255, 255, 255), r, rb);
+      rotateAndDraw3DLine(x, y, z, x + bigOffset, y, z, c, r, rb);
+      rotateAndDraw3DLine(x, y, z, x, y + bigOffset, z, c, r, rb);
+      rotateAndDraw3DLine(x + bigOffset, y, z, x + bigOffset, y + bigOffset, z, c, r, rb);
+      rotateAndDraw3DLine(x, y + bigOffset, z, x + bigOffset, y + bigOffset, z, c, r, rb);
       break;
     case 1:
-      rotateAndDraw3DLine(x, y, z, x + .6*BLOCKSIZE, y, z, color(255, 255, 255), r, rb);
-      rotateAndDraw3DLine(x, y, z, x, y, z + .6*BLOCKSIZE, color(255, 255, 255), r, rb);
-      rotateAndDraw3DLine(x + .6*BLOCKSIZE, y, z, x + .6*BLOCKSIZE, y, z + .6*BLOCKSIZE, color(255, 255, 255), r, rb);
-      rotateAndDraw3DLine(x, y, z + .6*BLOCKSIZE, x + .6*BLOCKSIZE, y, z + .6*BLOCKSIZE, color(255, 255, 255), r, rb);
+      rotateAndDraw3DLine(x, y, z, x + bigOffset, y, z, c, r, rb);
+      rotateAndDraw3DLine(x, y, z, x, y, z + bigOffset, c, r, rb);
+      rotateAndDraw3DLine(x + bigOffset, y, z, x + bigOffset, y, z + bigOffset, c, r, rb);
+      rotateAndDraw3DLine(x, y, z + bigOffset, x + bigOffset, y, z + bigOffset, c, r, rb);
       break;
     case 2:
-      rotateAndDraw3DLine(x, y, z, x, y + .6*BLOCKSIZE, z, color(255, 255, 255), r, rb);
-      rotateAndDraw3DLine(x, y, z, x, y, z + .6*BLOCKSIZE, color(255, 255, 255), r, rb);
-      rotateAndDraw3DLine(x, y + .6*BLOCKSIZE, z, x, y + .6*BLOCKSIZE, z + .6*BLOCKSIZE, color(255, 255, 255), r, rb);
-      rotateAndDraw3DLine(x, y, z + .6*BLOCKSIZE, x, y + .6*BLOCKSIZE, z + .6*BLOCKSIZE, color(255, 255, 255), r, rb);
+      rotateAndDraw3DLine(x, y, z, x, y + bigOffset, z, c, r, rb);
+      rotateAndDraw3DLine(x, y, z, x, y, z + bigOffset, c, r, rb);
+      rotateAndDraw3DLine(x, y + bigOffset, z, x, y + bigOffset, z + bigOffset, c, r, rb);
+      rotateAndDraw3DLine(x, y, z + bigOffset, x, y + bigOffset, z + bigOffset, c, r, rb);
       break;
   }
 }
