@@ -169,27 +169,71 @@ void drawCube(boolean[][][][][] data, float r, float rb) {
 
 void drawCubeLine(float x1, float y1, float z1, float x2, float y2, float z2, float r, float rb, int w) {
   boolean useZRend = z1 != z2;
-  z1 = z1-1;
-  z2 = z2-1;
+  if(w==-1) {
+    z1 = z1-1;
+    z2 = z2-1;
   
-  float tx = x1-1;
-  float ty = y1-1;
-  float tz;
-  x1 = tx * cos(r) - ty * sin(r);
-  y1 = tx * sin(r) + ty * cos(r);
-  tx = x2-1;
-  ty = y2-1;
-  x2 = tx * cos(r) - ty * sin(r);
-  y2 = tx * sin(r) + ty * cos(r);
+    float tx = x1-1;
+    float ty = y1-1;
+    float tz;
+    x1 = tx * cos(r) - ty * sin(r);
+    y1 = tx * sin(r) + ty * cos(r);
+    tx = x2-1;
+    ty = y2-1;
+    x2 = tx * cos(r) - ty * sin(r);
+    y2 = tx * sin(r) + ty * cos(r);
+    
+    ty = y1;
+    tz = z1;
+    y1 = ty * cos(rb) - tz * sin(rb);
+    z1 = ty * sin(rb) + tz * cos(rb);
+    ty = y2;
+    tz = z2;
+    y2 = ty * cos(rb) - tz * sin(rb);
+    z2 = ty * sin(rb) + tz * cos(rb);
+  } else {
+    if(abs(x1-x2) > .001) {//if the x is the one that changes
+      x1 -= .8;
+      x2 -= 1.2;
+    } else {
+      x1 -= 1;
+      x2 -= 1;
+    }
+    if(abs(y1-y2) > .001) {//if the x is the one that changes
+      y1 -= .8;
+      y2 -= 1.2;
+    } else {
+      y1 -= 1;
+      y2 -= 1;
+    }
+    if(abs(z1-z2) > .001) {//if the x is the one that changes
+      z1 -= .8;
+      z2 -= 1.2;
+    } else {
+      z1 -= 1;
+      z2 -= 1;
+    }
+    float tx = x1;
+    float ty = y1;
+    float tz = z1;
+    
+    x1 = tx * cos(r) - ty * sin(r);
+    y1 = tx * sin(r) + ty * cos(r);
+    tx = x2;
+    ty = y2;
+    x2 = tx * cos(r) - ty * sin(r);
+    y2 = tx * sin(r) + ty * cos(r);
+    
+    ty = y1;
+    tz = z1;
+    y1 = ty * cos(rb) - tz * sin(rb);
+    z1 = ty * sin(rb) + tz * cos(rb);
+    ty = y2;
+    tz = z2;
+    y2 = ty * cos(rb) - tz * sin(rb);
+    z2 = ty * sin(rb) + tz * cos(rb);
+  }
   
-  ty = y1;
-  tz = z1;
-  y1 = ty * cos(rb) - tz * sin(rb);
-  z1 = ty * sin(rb) + tz * cos(rb);
-  ty = y2;
-  tz = z2;
-  y2 = ty * cos(rb) - tz * sin(rb);
-  z2 = ty * sin(rb) + tz * cos(rb);
   if(!useZRend) {
     switch(w) {
       case -1:
