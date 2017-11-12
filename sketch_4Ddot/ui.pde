@@ -19,13 +19,13 @@ void drawCubeFace(int x, int y, int z, int w, int d, float r, float rb) {
       drawSquareFace(x, y, z, x, y+1, z+1, w, r, rb);
       break;
     case 3:
-      drawSegFace(x, y, z, x+1, y, z, w);
+      drawSegFace(x, y, z, x+1, y, z, w, r, rb);
       break;
     case 4:
-      drawSegFace(x, y, z, x, y+1, z, w);
+      drawSegFace(x, y, z, x, y+1, z, w, r, rb);
       break;
     case 5:
-      drawSegFace(x, y, z, x, y, z+1, w);
+      drawSegFace(x, y, z, x, y, z+1, w, r, rb);
       break;
   }
 }
@@ -140,8 +140,78 @@ void rotateAndDraw3DLine(float x1, float y1, float z1, float x2, float y2, float
   draw3DLine(x1, y1, z1, x2, y2, z2, c);
 }
 
-void drawSegFace(float x1, float y1, float z1, float x2, float y2, float z2, float w) {
-  
+void drawSegFace(float x1, float y1, float z1, float x2, float y2, float z2, float w, float r, float rb) {
+  //w = 0 for first 2, 1 for second 2
+  color c = color(255, 255, 255);
+  boolean useZRend = z1 != z2;
+  x1 -= 1;
+  x2 -= 1;
+  y1 -= 1;
+  y2 -= 1;
+  z1 -= 1;
+  z2 -= 1;
+  float o = DPXO * (w + 1.5);
+  if(abs(x1-x2) > .001) {//if the x is the one that changes, shorten that direction
+    x1 += .1;
+    x2 -= .1;
+    x1 *= BLOCKSIZE;
+    y1 *= BLOCKSIZE;
+    z1 *= BLOCKSIZE;
+    x2 *= BLOCKSIZE;
+    y2 *= BLOCKSIZE;
+    z2 *= BLOCKSIZE;
+    rotateAndDraw3DLine(x1, y1, z1-o, x1, y1, z1+o, c, r, rb);
+    rotateAndDraw3DLine(x2, y1, z1-o, x2, y1, z1+o, c, r, rb);
+    rotateAndDraw3DLine(x1, y1, z1-o, x2, y1, z1-o, c, r, rb);
+    rotateAndDraw3DLine(x1, y1, z1+o, x2, y1, z1+o, c, r, rb);
+  }
+  if(abs(y1-y2) > .001) {
+    y1 += .1;
+    y2 -= .1;
+    x1 *= BLOCKSIZE;
+    y1 *= BLOCKSIZE;
+    z1 *= BLOCKSIZE;
+    x2 *= BLOCKSIZE;
+    y2 *= BLOCKSIZE;
+    z2 *= BLOCKSIZE;
+    rotateAndDraw3DLine(x1, y1, z1-o, x1, y1, z1+o, c, r, rb);
+    rotateAndDraw3DLine(x1, y2, z1-o, x1, y2, z1+o, c, r, rb);
+    rotateAndDraw3DLine(x1, y1, z1-o, x1, y2, z1-o, c, r, rb);
+    rotateAndDraw3DLine(x1, y1, z1+o, x1, y2, z1+o, c, r, rb);
+  }
+  if(abs(z1-z2) > .001) {
+    z1 += .1;
+    z2 -= .1;
+    x1 *= BLOCKSIZE;
+    y1 *= BLOCKSIZE;
+    z1 *= BLOCKSIZE;
+    x2 *= BLOCKSIZE;
+    y2 *= BLOCKSIZE;
+    z2 *= BLOCKSIZE;
+    rotateAndDraw3DLine(x1-o, y1, z1, x1+o, y1, z1, c, r, rb);
+    rotateAndDraw3DLine(x1-o, y1, z2, x1+o, y1, z2, c, r, rb);
+    rotateAndDraw3DLine(x1-o, y1, z1, x1-o, y1, z2, c, r, rb);
+    rotateAndDraw3DLine(x1+o, y1, z1, x1+o, y2, z2, c, r, rb);
+  }
+  /*
+  if x changes
+    rotate and draw 3d line for: +- offset z, +z to x changed, -z to x changed, +-offset z at changed x
+    rotateAndDraw3DLine(
+    */
+}
+
+float[] rotatePoints(float x, float y, float z, float r, float rb) {
+  float tx = x;
+  float ty = y;
+  float tz = z;
+  x = tx * cos(r) - ty * sin(r);
+  y = tx * sin(r) + ty * cos(r);
+  ty = y;
+  tz = z;
+  y = ty * cos(rb) - tz * sin(rb);
+  z = ty * sin(rb) + tz * cos(rb);
+  float[] result = {x, y, z};
+  return result;
 }
 
 void drawCube(boolean[][][][][] data, float r, float rb) {
@@ -165,6 +235,7 @@ void drawCube(boolean[][][][][] data, float r, float rb) {
       }
     }
   }
+  
 }
 
 void drawCubeLine(float x1, float y1, float z1, float x2, float y2, float z2, float r, float rb, int w) {
@@ -199,14 +270,14 @@ void drawCubeLine(float x1, float y1, float z1, float x2, float y2, float z2, fl
       x1 -= 1;
       x2 -= 1;
     }
-    if(abs(y1-y2) > .001) {//if the x is the one that changes
+    if(abs(y1-y2) > .001) {//if the y is the one that changes
       y1 -= .8;
       y2 -= 1.2;
     } else {
       y1 -= 1;
       y2 -= 1;
     }
-    if(abs(z1-z2) > .001) {//if the x is the one that changes
+    if(abs(z1-z2) > .001) {//if the z is the one that changes
       z1 -= .8;
       z2 -= 1.2;
     } else {
