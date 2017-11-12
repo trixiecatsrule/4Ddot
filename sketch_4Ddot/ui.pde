@@ -53,37 +53,37 @@ void drawCubeLine(float x1, float y1, float z1, float x2, float y2, float z2, fl
   if(!useZRend) {
     switch(w) {
       case -1:
-        draw3DLine(200 * x1, 200 * y1, 200 * z1, 200 * x2, 200 * y2, 200 * z2, color(0, 0, 0));
+        draw3DLine(BLOCKSIZE * x1, BLOCKSIZE * y1, BLOCKSIZE * z1, BLOCKSIZE * x2, BLOCKSIZE * y2, BLOCKSIZE * z2, color(0, 0, 0));
         break;
       case 0:
-        draw3DLine(200 * x1, 200 * y1, 200 * z1 + 5, 200 * x2, 200 * y2, 200 * z2 + 5, color(255, 0, 0));
-        draw3DLine(200 * x1, 200 * y1, 200 * z1 - 5, 200 * x2, 200 * y2, 200 * z2 - 5, color(255, 0, 0));
+        draw3DLine(BLOCKSIZE * x1, BLOCKSIZE * y1, BLOCKSIZE * z1 + DPXO, BLOCKSIZE * x2, BLOCKSIZE * y2, BLOCKSIZE * z2 + DPXO, color(255, 0, 0));
+        draw3DLine(BLOCKSIZE * x1, BLOCKSIZE * y1, BLOCKSIZE * z1 - DPXO, BLOCKSIZE * x2, BLOCKSIZE * y2, BLOCKSIZE * z2 - DPXO, color(255, 0, 0));
         break;
       case 1:
-        draw3DLine(200 * x1, 200 * y1, 200 * z1 + 10, 200 * x2, 200 * y2, 200 * z2 + 10, color(0, 255, 0));
-        draw3DLine(200 * x1, 200 * y1, 200 * z1 - 10, 200 * x2, 200 * y2, 200 * z2 - 10, color(0, 255, 0));
+        draw3DLine(BLOCKSIZE * x1, BLOCKSIZE * y1, BLOCKSIZE * z1 + DPXO * 2, BLOCKSIZE * x2, BLOCKSIZE * y2, BLOCKSIZE * z2 + DPXO * 2, color(0, 255, 0));
+        draw3DLine(BLOCKSIZE * x1, BLOCKSIZE * y1, BLOCKSIZE * z1 - DPXO * 2, BLOCKSIZE * x2, BLOCKSIZE * y2, BLOCKSIZE * z2 - DPXO * 2, color(0, 255, 0));
         break;
       case 2:
-        draw3DLine(200 * x1, 200 * y1, 200 * z1 + 15, 200 * x2, 200 * y2, 200 * z2 + 15, color(0, 0, 255));
-        draw3DLine(200 * x1, 200 * y1, 200 * z1 - 15, 200 * x2, 200 * y2, 200 * z2 - 15, color(0, 0, 255));
+        draw3DLine(BLOCKSIZE * x1, BLOCKSIZE * y1, BLOCKSIZE * z1 + DPXO * 3, BLOCKSIZE * x2, BLOCKSIZE * y2, BLOCKSIZE * z2 + DPXO * 3, color(0, 0, 255));
+        draw3DLine(BLOCKSIZE * x1, BLOCKSIZE * y1, BLOCKSIZE * z1 - DPXO * 3, BLOCKSIZE * x2, BLOCKSIZE * y2, BLOCKSIZE * z2 - DPXO * 3, color(0, 0, 255));
         break;
     }
   } else {
     switch(w) {
       case -1:
-        draw3DLine(200 * x1, 200 * y1, 200 * z1, 200 * x2, 200 * y2, 200 * z2, color(0, 0, 0));
+        draw3DLine(BLOCKSIZE * x1, BLOCKSIZE * y1, BLOCKSIZE * z1, BLOCKSIZE * x2, BLOCKSIZE * y2, BLOCKSIZE * z2, color(0, 0, 0));
         break;
       case 0:
-        draw3DLine(200 * x1 + 5, 200 * y1, 200 * z1, 200 * x2 + 5, 200 * y2, 200 * z2, color(255, 0, 0));
-        draw3DLine(200 * x1 - 5, 200 * y1, 200 * z1, 200 * x2 - 5, 200 * y2, 200 * z2, color(255, 0, 0));
+        draw3DLine(BLOCKSIZE * x1 + DPXO, BLOCKSIZE * y1, BLOCKSIZE * z1, BLOCKSIZE * x2 + DPXO, BLOCKSIZE * y2, BLOCKSIZE * z2, color(255, 0, 0));
+        draw3DLine(BLOCKSIZE * x1 - DPXO, BLOCKSIZE * y1, BLOCKSIZE * z1, BLOCKSIZE * x2 - DPXO, BLOCKSIZE * y2, BLOCKSIZE * z2, color(255, 0, 0));
         break;
       case 1:
-        draw3DLine(200 * x1 + 10, 200 * y1, 200 * z1, 200 * x2 + 10, 200 * y2, 200 * z2, color(0, 255, 0));
-        draw3DLine(200 * x1 - 10, 200 * y1, 200 * z1, 200 * x2 - 10, 200 * y2, 200 * z2, color(0, 255, 0));
+        draw3DLine(BLOCKSIZE * x1 + DPXO * 2, BLOCKSIZE * y1, BLOCKSIZE * z1, BLOCKSIZE * x2 + DPXO * 2, BLOCKSIZE * y2, BLOCKSIZE * z2, color(0, 255, 0));
+        draw3DLine(BLOCKSIZE * x1 - DPXO * 2, BLOCKSIZE * y1, BLOCKSIZE * z1, BLOCKSIZE * x2 - DPXO * 2, BLOCKSIZE * y2, BLOCKSIZE * z2, color(0, 255, 0));
         break;
       case 2:
-        draw3DLine(200 * x1 + 15, 200 * y1, 200 * z1, 200 * x2 + 15, 200 * y2, 200 * z2, color(0, 0, 255));
-        draw3DLine(200 * x1 - 15, 200 * y1, 200 * z1, 200 * x2 - 15, 200 * y2, 200 * z2, color(0, 0, 255));
+        draw3DLine(BLOCKSIZE * x1 + DPXO * 3, BLOCKSIZE * y1, BLOCKSIZE * z1, BLOCKSIZE * x2 + DPXO * 3, BLOCKSIZE * y2, BLOCKSIZE * z2, color(0, 0, 255));
+        draw3DLine(BLOCKSIZE * x1 - DPXO * 3, BLOCKSIZE * y1, BLOCKSIZE * z1, BLOCKSIZE * x2 - DPXO * 3, BLOCKSIZE * y2, BLOCKSIZE * z2, color(0, 0, 255));
         break;
     }
   }

@@ -11,7 +11,7 @@ float z = 100;
 void setup() {
   size(400, 400);
   background(255);
-  smooth(4);
+  smooth(0);
 }
 
 void draw() {
