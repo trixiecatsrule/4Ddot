@@ -9,11 +9,11 @@ float y = 100;
 float z = 100;
 
 void setup() {
-  size(400, 400);
+  size(700, 700);
   background(255);
   smooth(0);
   initFieldDataSquares();
-  noLoop();
+  //noLoop();
 }
 
 void draw() {
@@ -29,6 +29,11 @@ void draw() {
   fieldDataSegs[0][0][0][0][2] = true;
   fieldDataSegs[1][0][0][0][2] = true;
   fieldDataSegs[0][0][1][0][0] = true;
+  
+  fieldDataSegs[0][0][0][1][0] = true;
+  fieldDataSegs[0][0][0][1][2] = true;
+  fieldDataSegs[1][0][0][1][2] = true;
+  fieldDataSegs[0][0][1][1][0] = true;
   
   fieldDataSegs[0][0][0][2][0] = true;
   fieldDataSegs[0][0][0][2][2] = true;
@@ -53,8 +58,11 @@ void draw() {
   //println(x, y);
   delay(50);
   */
-  background(255);
-  drawCube(fieldDataSegs, millis()/4000.0*PI, PI*sin(millis()/2000.0*PI)/10);
+  background(0);
+  drawCube(fieldDataSegs, millis()/8000.0*PI, PI*sin(millis()/4000.0*PI)/20);
+  ndrawSquareFace(0, 0, 0, 0, 2, millis()/8000.0*PI, PI*sin(millis()/4000.0*PI)/20);
+  //drawSquareFace(0, 0, 0, 0, 1, 1, 1, millis()/8000.0*PI, PI*sin(millis()/4000.0*PI)/20);
+  //rotateAndDraw3DLine(-200, 0, 0, 200, 0, 0, color(255, 255, 255), millis()/8000.0*PI, PI*sin(millis()/4000.0*PI)/20);
   //drawCube(fieldDataSegs, 0, 0);
   /*
   for(int i = 0; i <= 7; i++) {
@@ -62,6 +70,6 @@ void draw() {
   }*/
   
   //println(anyOutOfBounds(1, 0, 2, 2));
-  findAndSetSquares(fieldDataSegs, fieldDataSquares, 0, 0, 0, 0, player.p1);
-  println(fieldDataSquares[0][0][0][0][2]);
+  //findAndSetSquares(fieldDataSegs, fieldDataSquares, 0, 0, 0, 0, player.p1);
+  //println(fieldDataSquares[0][0][0][0][2]);
 }
