@@ -37,7 +37,7 @@ boolean anyOutOfBounds(int a, int b, int c, int d) {
   return !(a >=0 && a <=2 && b >=0 && b <=2 && c >=0 && c <=2 && d >=0 && d <=2);
 }
 
-void findAndSetSquares(boolean[][][][][] segs, player[][][][][] squares, int x, int y, int z, int w) {
+void findAndSetSquares(boolean[][][][][] segs, player[][][][][] squares, int x, int y, int z, int w, player p) {
   //x+, x-, y+, y-, z+, z-, w+, w-
   //point connections
   boolean[] pcons = getConnections(segs, x, y, z, w);
@@ -65,15 +65,52 @@ void findAndSetSquares(boolean[][][][][] segs, player[][][][][] squares, int x, 
             if(initialDirectionPointConnections[j]) {//initial direction's point has edge in found perpendicular direction
               
               //face found in direction i/j
-              println(x, y, z, w, i, j);
-              //delay(10000);
-              
+              setSquare(squares, x, y, z, w, i, j, p);
             }
           }
         }
       }
     }
   }
+}
+
+void setSquare(player[][][][][] squares, int x, int y, int z, int w, int i, int j, player p) {
+  //x+, x-, y+, y-, z+, z-, w+, w-
+  int[] iOff = dcTrueToXYZWOffset(i);
+  //shifts square in - dir if needed because squares stored in + direction
+  if(hasNegative(iOff)) {
+    x += iOff[0];
+    y += iOff[2];
+    z += iOff[2];
+    w += iOff[3];
+    i--;
+  }
+  int[] jOff = dcTrueToXYZWOffset(j);
+  if(hasNegative(jOff)) {
+    x += jOff[0];
+    y += jOff[2];
+    z += jOff[2];
+    w += jOff[3];
+    j--;
+  }
+  //i, j, and coords are now properly set up for adding a square
+  //0   1   2   3   4   5   6   7
+  //x+, x-, y+, y-, z+, z-, w+, w-
+  //xy, xz, yz, wx, wy, wz
+  if((i == 0 && j == 2) || (i == 2 && j == 0)) squares[x][y][z][w][0] = p;//xy
+  if((i == 0 && j == 4) || (i == 4 && j == 0)) squares[x][y][z][w][1] = p;//xz
+  if((i == 2 && j == 4) || (i == 4 && j == 2)) squares[x][y][z][w][2] = p;//yz
+  if((i == 6 && j == 0) || (i == 0 && j == 6)) squares[x][y][z][w][3] = p;//wx
+  if((i == 6 && j == 2) || (i == 2 && j == 6)) squares[x][y][z][w][4] = p;//wy
+  if((i == 6 && j == 4) || (i == 4 && j == 6)) squares[x][y][z][w][5] = p;//wz
+}
+
+boolean hasNegative(int[] in) {
+  boolean result = false;
+  for(int i : in) {
+    if(i < 0) result = true;
+  }
+  return result;
 }
 
 boolean noDice(int i, int j) {

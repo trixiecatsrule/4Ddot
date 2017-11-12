@@ -4,6 +4,9 @@ void draw3DLine(float x1, float y1, float z1, float x2, float y2, float z2, colo
   y2 = y2 + 1000;
   line(width/2 + x1/(y1/CLEN), height/2 + z1/(y1/CLEN), width/2 + x2/(y2/CLEN), height/2 + z2/(y2/CLEN));
 }
+
+
+
 void drawCube(boolean[][][][][] data, float r, float rb) {
   for(int x = 0; x <=  2; x++) {
     for(int y = 0; y <= 2; y++) {

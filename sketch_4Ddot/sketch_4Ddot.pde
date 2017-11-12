@@ -12,6 +12,7 @@ void setup() {
   size(400, 400);
   background(255);
   smooth(0);
+  initFieldDataSquares();
   noLoop();
 }
 
@@ -61,5 +62,6 @@ void draw() {
   }*/
   
   //println(anyOutOfBounds(1, 0, 2, 2));
-  findAndSetSquares(fieldDataSegs, fieldDataSquares, 0, 0, 0, 0);
+  findAndSetSquares(fieldDataSegs, fieldDataSquares, 0, 0, 0, 0, player.p1);
+  println(fieldDataSquares[0][0][0][0][2]);
 }
