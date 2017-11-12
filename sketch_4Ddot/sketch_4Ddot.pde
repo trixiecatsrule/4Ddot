@@ -12,15 +12,27 @@ void setup() {
   size(400, 400);
   background(255);
   smooth(0);
+  noLoop();
 }
 
 void draw() {
+  /*
   fieldDataSegs[0][0][0][2][2] = true;
   fieldDataSegs[0][0][0][1][0] = true;
   fieldDataSegs[0][0][0][0][2] = true;
   fieldDataSegs[1][0][0][2][0] = true;
   fieldDataSegs[0][1][0][2][1] = true;
   fieldDataSegs[0][0][1][2][2] = true;
+  */
+  fieldDataSegs[0][0][0][0][0] = true;
+  fieldDataSegs[0][0][0][0][2] = true;
+  fieldDataSegs[1][0][0][0][2] = true;
+  fieldDataSegs[0][0][1][0][0] = true;
+  
+  fieldDataSegs[0][0][0][2][0] = true;
+  fieldDataSegs[0][0][0][2][2] = true;
+  fieldDataSegs[1][0][0][2][2] = true;
+  fieldDataSegs[0][0][1][2][0] = true;
   //boolean[] test = getConnections(fieldDataSegs, 0, 0, 0, 0);
   //println(test);
   //test = getConnections(fieldDataSegs, 1, 0, 0, 0);
@@ -43,4 +55,11 @@ void draw() {
   background(255);
   drawCube(fieldDataSegs, millis()/4000.0*PI, PI*sin(millis()/2000.0*PI)/10);
   //drawCube(fieldDataSegs, 0, 0);
+  /*
+  for(int i = 0; i <= 7; i++) {
+    println(dcTrueToXYZWOffset(i));
+  }*/
+  
+  //println(anyOutOfBounds(1, 0, 2, 2));
+  findAndSetSquares(fieldDataSegs, fieldDataSquares, 0, 0, 0, 0);
 }
